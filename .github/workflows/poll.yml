@@ -2,9 +2,9 @@ name: Poll Telegram channels
 
 on:
   schedule:
-    # Every 30 minutes. A half-hour gap is invisible on a job board, and it
-    # keeps Anthropic API spend to what a handful of new posts costs.
-    - cron: "*/30 * * * *"
+    # Every 5 minutes. Poll mode only processes posts newer than each channel's
+    # cursor, so routine runs stay bounded to newly published messages.
+    - cron: "*/5 * * * *"
   workflow_dispatch:
     inputs:
       mode:
