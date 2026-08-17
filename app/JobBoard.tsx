@@ -55,6 +55,6 @@ export default function JobBoard({ jobs, notice }: { jobs: Job[]; notice?: strin
         : <button className="reveal" onClick={() => setRevealed([...revealed, job.id])}>إظهار وسيلة التواصل</button>}</article>;
     })}</div></section>) : <div className="empty">{notice ?? "لا توجد وظائف مطابقة لهذه الفلاتر."}</div>}</section>
     <section className="about" id="about"><p className="eyebrow">كيف تعمل المنصة؟</p><h2>نبحث، نصنّف، وننشر</h2><div className="steps"><div><b>01</b><h3>متابعة مستمرة</h3><p>نفحص القنوات المختارة تلقائياً كل 30 دقيقة.</p></div><div><b>02</b><h3>تصنيف ذكي</h3><p>نستخرج الوظائف العلمية داخل السعودية فقط.</p></div><div><b>03</b><h3>محتوى متجدد</h3><p>تُخفى الوظيفة تلقائياً بعد مرور 30 يوماً.</p></div></div></section>
-    <footer><div className="brand"><span className="brandMark">س</span><span><b>وظائف العلوم</b><small>Saudi Science Jobs</small></span></div><p>منصة مستقلة لجمع الوظائف العلمية في المملكة العربية السعودية.</p><span>© 2026</span></footer>
+    <footer><div className="brand"><span className="brandMark">س</span><span><b>وظائف العلوم</b><small>Saudi Science Jobs</small></span></div><p>منصة مستقلة لجمع الوظائف العلمية في المملكة العربية السعودية.</p><div className="footerEnd"><span>© 2026</span><Link className="adminLink" href="/admin">دخول الإدارة</Link></div></footer>
   </main>;
 }
