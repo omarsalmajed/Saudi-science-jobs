@@ -21,11 +21,6 @@ on:
       pages:
         description: "Backfill: page ceiling per channel (~20 posts/page — a safety cap, DAYS is what actually bounds it)"
         default: "60"
-      status:
-        description: "Where accepted jobs land"
-        type: choice
-        options: [pending, published]
-        default: pending
 
 # If a run is still going when the next cron fires, let the first finish
 # rather than racing it for the same cursor.
@@ -60,5 +55,5 @@ jobs:
           MODE: ${{ inputs.mode || 'poll' }}
           DAYS: ${{ inputs.days || '30' }}
           PAGES: ${{ inputs.pages || '60' }}
-          JOB_STATUS: ${{ inputs.status || vars.JOB_STATUS || 'pending' }}
+          JOB_STATUS: published
         run: node run.js
