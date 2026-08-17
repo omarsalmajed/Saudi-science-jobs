@@ -1,0 +1,64 @@
+name: Poll Telegram channels
+
+on:
+  schedule:
+    # Every 30 minutes. A half-hour gap is invisible on a job board, and it
+    # keeps Anthropic API spend to what a handful of new posts costs.
+    - cron: "*/30 * * * *"
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: >-
+          poll = only new posts (the cron) · backfill = walk back DAYS days ·
+          republish = promote queued Telegram jobs to published · dryrun =
+          run the full pipeline and print decisions, write nothing
+        type: choice
+        options: [poll, backfill, republish, dryrun]
+        default: backfill
+      days:
+        description: "Backfill: how many days of history to cover"
+        default: "30"
+      pages:
+        description: "Backfill: page ceiling per channel (~20 posts/page — a safety cap, DAYS is what actually bounds it)"
+        default: "60"
+      status:
+        description: "Where accepted jobs land"
+        type: choice
+        options: [pending, published]
+        default: pending
+
+# If a run is still going when the next cron fires, let the first finish
+# rather than racing it for the same cursor.
+concurrency:
+  group: poller
+  cancel-in-progress: false
+
+jobs:
+  poll:
+    runs-on: ubuntu-latest
+    # A poll tick finishes in well under a minute; a 30-day backfill across
+    # both channels, each post going through triage first, can run long.
+    timeout-minutes: 90
+    defaults:
+      run:
+        working-directory: automation
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - run: npm install --omit=dev
+
+      - name: Run poller
+        env:
+          FEED_CHANNELS: ${{ vars.FEED_CHANNELS || 'cd4cd,sharqiahjobs' }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          MODE: ${{ inputs.mode || 'poll' }}
+          DAYS: ${{ inputs.days || '30' }}
+          PAGES: ${{ inputs.pages || '60' }}
+          JOB_STATUS: ${{ inputs.status || vars.JOB_STATUS || 'pending' }}
+        run: node run.js
