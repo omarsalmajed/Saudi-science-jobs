@@ -55,7 +55,7 @@ jobs:
         env:
           FEED_CHANNELS: ${{ vars.FEED_CHANNELS || 'cd4cd,sharqiahjobs' }}
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          SUPABASE_URL: ${{ vars.SUPABASE_URL }}
+          SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://raeeldlirslrjqxjjhaq.supabase.co' }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
           MODE: ${{ inputs.mode || 'poll' }}
           DAYS: ${{ inputs.days || '30' }}
