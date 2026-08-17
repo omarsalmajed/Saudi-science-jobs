@@ -37,7 +37,7 @@ jobs:
   poll:
     runs-on: ubuntu-latest
     # A poll tick finishes in well under a minute; a 30-day backfill across
-    # both channels, each post going through triage first, can run long.
+    # all channels, each post going through triage first, can run long.
     timeout-minutes: 90
     defaults:
       run:
@@ -53,7 +53,7 @@ jobs:
 
       - name: Run poller
         env:
-          FEED_CHANNELS: ${{ vars.FEED_CHANNELS || 'cd4cd,sharqiahjobs' }}
+          FEED_CHANNELS: cd4cd,sharqiahjobs,wadhefadotcom,ewdifh
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://raeeldlirslrjqxjjhaq.supabase.co' }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
