@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Saudi Science Jobs | وظائف العلوم السعودية",
-  description: "أحدث وظائف العلوم في المملكة العربية السعودية، محدثة كل 30 دقيقة.",
+  description: "أحدث وظائف العلوم في المملكة العربية السعودية، محدثة كل 5 دقائق.",
 };
 
 export default function RootLayout({
