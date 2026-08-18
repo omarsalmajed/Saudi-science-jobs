@@ -48,7 +48,7 @@ jobs:
 
       - name: Run poller
         env:
-          FEED_CHANNELS: cd4cd,sharqiahjobs,wadhefadotcom,ewdifh,lab_jobs1,jobsjeddah24,medicalghallab,tvt1440,MOHNADJOB,aseerjobs24
+          FEED_CHANNELS: cd4cd,sharqiahjobs,wadhefadotcom,ewdifh,lab_jobs1,jobsjeddah24,medicalghallab,tvt1440,MOHNADJOB,aseerjobs24,jazanjobs
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://raeeldlirslrjqxjjhaq.supabase.co' }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
