@@ -2,9 +2,9 @@ name: Poll Telegram channels
 
 on:
   schedule:
-    # Every 5 minutes. Poll mode only processes posts newer than each channel's
+    # Once daily at 9:00 AM Saudi time (06:00 UTC). Poll mode only processes posts newer than each channel's
     # cursor, so routine runs stay bounded to newly published messages.
-    - cron: "*/5 * * * *"
+    - cron: "0 6 * * *"
   workflow_dispatch:
     inputs:
       mode:
