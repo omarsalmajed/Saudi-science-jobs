@@ -1,6 +1,8 @@
 name: Poll Telegram channels
 
 on:
+  push:
+    branches: [main]
   schedule:
     # Once daily at 9:00 AM Saudi time (06:00 UTC). Poll mode only processes posts newer than each channel's
     # cursor, so routine runs stay bounded to newly published messages.
@@ -52,7 +54,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           SUPABASE_URL: ${{ vars.SUPABASE_URL || 'https://raeeldlirslrjqxjjhaq.supabase.co' }}
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
-          MODE: ${{ inputs.mode || 'poll' }}
+          MODE: ${{ inputs.mode || (github.event_name == 'push' && 'backfill') || 'poll' }}
           DAYS: ${{ inputs.days || '30' }}
           PAGES: ${{ inputs.pages || '60' }}
           JOB_STATUS: published
