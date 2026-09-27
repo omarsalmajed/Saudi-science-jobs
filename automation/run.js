@@ -357,7 +357,7 @@ for (const channel of CHANNELS) {
 
     if (posts.length > MAX_POSTS) {
       console.log(`@${channel}: capping ${posts.length} posts at MAX_POSTS=${MAX_POSTS}`);
-      posts = posts.slice(0, MAX_POSTS);
+      posts = MODE === "backfill" ? posts.slice(-MAX_POSTS) : posts.slice(0, MAX_POSTS);
     }
     stats.scanned = posts.length;
     console.log(`${MODE}: @${channel} — ${posts.length} post(s), cursor ${lastId}`);
